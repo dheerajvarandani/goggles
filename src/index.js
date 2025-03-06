@@ -61,24 +61,30 @@ loader.load(
         logo_grp = logoScene.getObjectByName('k_logo_grp');
         logo = logoScene.getObjectByName('goggles');
 
+        logoScene.getObjectByName('goggles_1').material.metalness = 1.0
+        logoScene.getObjectByName('goggles_1').material.roughness = 0
+
+        logoScene.getObjectByName('goggles_3').material.metalness = 1.0
+        logoScene.getObjectByName('goggles_3').material.roughness = 0
+
 
 
 
         //logo.material.bumpScale = 0.5
-        logo.material.normalScale = new THREE.Vector2(0.07,-0.07);
+        //logo.material.normalScale = new THREE.Vector2(0.07,-0.07);
 
         //logo.material.roughnessMap = roughnessMap;
-        logo.material.needsUpdate = true;
+        //logo.material.needsUpdate = true;
 
         //logo.material.normalMap = normalMap;
         // Make the logo material more metallic
         if (logo) {
             logo.traverse((child) => {
                 if (child.isMesh) {
-                    child.material.metalness = 1.0;
-                    child.material.roughness = 0.2;
+                    //child.material.metalness = 1.0;
+                    //child.material.roughness = 0.2;
 
-                    console.log(child.material);
+                    console.log(child);
                     
 
 
@@ -108,7 +114,7 @@ function animate(time) {
 
     // Rotate the logo if it exists
     if(logo){
-        logo.rotation.z += 0.005;
+        logo.rotation.y += 0.005;
     }
 
     // Render the scene from the perspective of the camera
