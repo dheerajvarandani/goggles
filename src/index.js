@@ -4,7 +4,7 @@ import { OrbitControls } from '../three/OrbitControls.js';
 import { RGBELoader } from '../three/RGBELoader.js';
 
 // Variables to hold the logo scene and logo object
-let logoScene, logo_grp, logo;
+let logoScene, logo_grp, goggles;
 
 // Create a new Three.js scene
 const scene = new THREE.Scene();
@@ -24,8 +24,8 @@ const controls = new OrbitControls( camera, renderer.domElement );
 
 // Set the initial position of the camera
 camera.position.x = 2;
-camera.position.y = 0;
-camera.position.z = 0.75;
+camera.position.y = 1.5;
+camera.position.z = 1.5;
 
 // Enable damping (inertia) for the controls
 controls.enableDamping = true;
@@ -51,7 +51,7 @@ var loadingManager = new THREE.LoadingManager();
 // Load the GLTF model
 const loader = new GLTFLoader(loadingManager);
 loader.load(
-    './assets/goggles.glb',
+    './assets/goggles.gltf',
     function ( gltf ) {
         // Add the loaded scene to the main scene
         logoScene = gltf.scene;
@@ -59,13 +59,17 @@ loader.load(
 
         // Get the logo object by name
         logo_grp = logoScene.getObjectByName('k_logo_grp');
-        logo = logoScene.getObjectByName('goggles');
+        goggles = logoScene.getObjectByName('goggles');
 
-        logoScene.getObjectByName('goggles_1').material.metalness = 1.0
-        logoScene.getObjectByName('goggles_1').material.roughness = 0
+        console.log(goggles)
 
-        logoScene.getObjectByName('goggles_3').material.metalness = 1.0
-        logoScene.getObjectByName('goggles_3').material.roughness = 0
+        logoScene.getObjectByName('frame_1').material.metalness = 1.0
+        logoScene.getObjectByName('frame_1').material.roughness = 0
+        logoScene.getObjectByName('frame_1').material.side = THREE.DoubleSide
+
+        logoScene.getObjectByName('right_inner_padding').material.side = THREE.DoubleSide
+        logoScene.getObjectByName('left_lens_1').material.side = THREE.DoubleSide
+        logoScene.getObjectByName('left_lens_1').material.roughness = 0.1
 
 
 
@@ -78,8 +82,8 @@ loader.load(
 
         //logo.material.normalMap = normalMap;
         // Make the logo material more metallic
-        if (logo) {
-            logo.traverse((child) => {
+        if (goggles) {
+            goggles.traverse((child) => {
                 if (child.isMesh) {
                     //child.material.metalness = 1.0;
                     //child.material.roughness = 0.2;
@@ -113,8 +117,8 @@ function animate(time) {
     controls.update();
 
     // Rotate the logo if it exists
-    if(logo){
-        logo.rotation.y += 0.005;
+    if(goggles){
+        goggles.rotation.y += 0.005;
     }
 
     // Render the scene from the perspective of the camera
