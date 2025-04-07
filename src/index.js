@@ -63,13 +63,17 @@ loader.load(
 
         console.log(goggles)
 
-        logoScene.getObjectByName('frame_1').material.metalness = 1.0
-        logoScene.getObjectByName('frame_1').material.roughness = 0
-        logoScene.getObjectByName('frame_1').material.side = THREE.DoubleSide
+        logoScene.getObjectByName('frames_1').material.metalness = 1.0
+        logoScene.getObjectByName('frames_1').material.roughness = 0.1
+        logoScene.getObjectByName('frames_1').material.side = THREE.DoubleSide
 
         logoScene.getObjectByName('right_inner_padding').material.side = THREE.DoubleSide
+        logoScene.getObjectByName('left_lens_2').material.side = THREE.DoubleSide
+        logoScene.getObjectByName('left_lens_2').material.roughness = 0.1
         logoScene.getObjectByName('left_lens_1').material.side = THREE.DoubleSide
         logoScene.getObjectByName('left_lens_1').material.roughness = 0.1
+        logoScene.getObjectByName('left_lens_3').material.side = THREE.DoubleSide
+        logoScene.getObjectByName('left_lens_3').material.roughness = 0.1
 
 
 
